@@ -21419,9 +21419,6 @@ label:not(.form-check-label):not(.custom-file-label) {
   z-index: 5;
 }
 
-
-
-
 .form-control.is-warning {
   border-color: #ffc107;
 }
@@ -27705,10 +27702,6 @@ body.text-sm .input-group-text {
   border: none;
 }
 
-
-.bk-11{
-  background-color:red;
-}
 .card.bg-blue .bootstrap-datetimepicker-widget table thead tr:first-child th:hover,
 .card.bg-blue .bootstrap-datetimepicker-widget table td.day:hover,
 .card.bg-blue .bootstrap-datetimepicker-widget table td.hour:hover,
