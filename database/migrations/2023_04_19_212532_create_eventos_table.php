@@ -21,8 +21,11 @@ return new class extends Migration
             $table->time('hora_evento');
             $table->unsignedSmallInteger('estado');
             $table->String('ubicacion');
-            $table->foreignId('administador_id')->constrained(
-                table: 'administradores'
+            // $table->foreignId('administador_id')->constrained(
+            //     table: 'administradores'
+            // );
+            $table->foreignId('invitado_id')->constrained(
+                table: 'invitados'
             );
             $table->timestamps();
         });

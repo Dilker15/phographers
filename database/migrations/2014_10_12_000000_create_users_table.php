@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
+            $table->foreingId('invitado_id')->constrained(
+                table:'invitados'
+            );
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
         });

@@ -35,6 +35,57 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+
+
+            Route::middleware('web')
+                ->group(base_path('routes/routes-web/albun-route.php'));
+
+            
+            Route::middleware('web')
+                ->group(base_path('routes/routes-web/codigoQr-route.php'));
+
+
+                Route::middleware('web')
+                ->group(base_path('routes/routes-web/evento-route.php'));
+
+
+                Route::middleware('web')
+                ->group(base_path('routes/routes-web/fotografo-route.php'));
+
+
+                Route::middleware('web')
+                ->group(base_path('routes/routes-web/fotos-route.php'));
+
+
+
+                Route::middleware('web')
+                ->group(base_path('routes/routes-web/galeria-route.php'));
+
+
+
+                Route::middleware('web')
+                ->group(base_path('routes/routes-web/invitado-route.php'));
+
+
+
+                Route::middleware('web')
+                ->group(base_path('routes/routes-web/lista-route.php'));
+
+
+
+                Route::middleware('web')
+                ->group(base_path('routes/routes-web/plan-route.php'));
+
+
+
+                Route::middleware('web')
+                ->group(base_path('routes/routes-web/listaInvitado-route.php'));
+
+
+
+                
+                Route::middleware('web')
+                ->group(base_path('routes/routes-web/suscripcion-route.php'));
         });
     }
 
