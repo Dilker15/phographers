@@ -320,8 +320,24 @@ return [
         ],
         ['header' => 'account_settings'],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
+            'text' => 'Perfil-Fotografo',
+             'route' =>'evento.create',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        
+        [
+            'text' => 'Eventos',
+             'route' =>'evento.index',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Perfil-Invitado',
+             'route' =>'evento.index',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Mis Eventos',
+             'route' =>'evento.create',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

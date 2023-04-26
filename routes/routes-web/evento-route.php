@@ -13,8 +13,9 @@ Route::prefix('evento')->name('evento.')->middleware(['auth'])->group(function()
 
         Route::get('/',[EventoController::class,'index'])->name('index');
 
-        Route::get('/create',[EventoController::class,'store'])->name('create');
+        Route::get('/create',[EventoController::class,'create'])->name('create');
 
+        Route::get('/store',[EventoController::class,'store'])->name('store');
         Route::get('/edit/{evento}',[EventoController::class,'edit'])->name('edit');
 
         Route::put('/update/{evento}',[EventoController::class,'update'])->name('update');
