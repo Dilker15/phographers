@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('fotos', function (Blueprint $table) {
+        Schema::create('invitaciones', function (Blueprint $table) {
             $table->id();
             $table->foreignId('evento_id')->constrained(
                 table:'eventos'
@@ -21,9 +21,7 @@ return new class extends Migration
             $table->foreignId('fotografo_id')->constrained(
                 table:'fotografos_estudios'
             );
-            $table->decimal('precio',5,2);
-            $table->String('url');
-            $table->unsignedSmallInteger('tipo')->default(1);
+            $table->unsignedSmallInteger('estado')->default(0);
             $table->timestamps();
         });
     }
@@ -35,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fotos');
+        Schema::dropIfExists('invitaciones');
     }
 };

@@ -3,13 +3,13 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Mis fotos</h1>
 @stop
 
 @section('content')
 
 <div class="card-bodys">
-    <a href="{{route('evento.create')}}" class="btn btn-success btn-sm">Crear Evento</a>
+    <a href="{{route('fotografos.subirFotos')}}" class="btn btn-success btn-sm float-right"><i class="fa fa-plus"></i>Agregar Fotos</a>
 </div>
     
 
@@ -17,19 +17,18 @@
 <div class="grilla">
 
   
-    @foreach($eventos as $evento)
+    @foreach($fotos as $foto)
 
   
     <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="https://placeimg.com/640/480/tech" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">{{$evento->nombre}}</h5>
-          <p class="card-text">{{$evento->descripcion}}</p>
+          <h5 class="card-title">{{$foto->nombre}}</h5>
+          <p class="card-text">{{$foto->descripcion}}</p>
 
-          <div class="container2">
-            <a href="{{route('evento.show',$evento->id)}}" class="btn btn-primary">Ver</a>
-            <a href="{{route('evento.actividad',$evento->id)}}" class="btn btn-primary">Ver</a>
-          </div>
+          {{-- <div class="container2">
+            <a href="{{route('fotografos.actividad',[$foto->id,$fotografo->id])}}" class="btn btn-primary">Administrar</a>
+          </div> --}}
          
 
         </div>

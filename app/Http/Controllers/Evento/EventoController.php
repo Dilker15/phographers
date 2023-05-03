@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Evento;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Fotografo\Fotografo;
+use App\Models\Evento\Evento;
+use App\Models\Invitacion\Invitacion;
+use App\Models\EventoFotografo\EventoFotografo;
+use App\Models\Foto\Foto;
 
 class EventoController extends Controller
 {
@@ -14,7 +19,10 @@ class EventoController extends Controller
      */
     public function index()
     {
-        return view('eventos.index');
+        $eventos = Evento::where('invitado_id','=',auth()->user()->invitado_id)->get();
+       
+       
+        return view('eventos.index',compact('eventos'));
     }
 
     /**
@@ -24,7 +32,9 @@ class EventoController extends Controller
      */
     public function create()
     {
-        return view('eventos.create');
+         $fotografos = Fotografo::get();
+         
+        return view('eventos.create',compact('fotografos'));
     }
 
     /**
@@ -35,7 +45,35 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datos = $request;
+        
+        $fotografos =$datos['fotografos'];
+        
+        // dd($fotografos);
+        $evento = Evento::create([
+            'nombre' => $datos['nombre'],
+            'descripcion' => $datos['descripcion'],
+            'fecha_evento' => $datos['fecha'],
+            'hora_evento' => $datos['hora'],
+            'invitado_id' => auth()->id(),
+            'ubicacion' => $datos['direccion'],
+            'estado' => 1
+        ]);
+
+        // dd(count($fotografos));
+
+
+     for( $i=0;$i<count($fotografos);$i++){
+
+        $invitacion = Invitacion::create([
+            'evento_id' => $evento->id,
+            'fotografo_id' => $fotografos[$i],
+            'estado' => 0
+        ]);
+        
+     }
+       
+        // dd($evento);
     }
 
     /**
@@ -46,7 +84,37 @@ class EventoController extends Controller
      */
     public function show($evento)
     {
-        return view('evento.edit',compact('evento'));
+        return view('eventos.show',compact('evento'));
+    }
+
+
+
+    public function actividad($evento){
+
+
+        // $eventos = EventoFotografo::where('evento_id','=',$evento)->get()->first();
+        // dd(count($creacion));
+        // OBTENIENDO LA GALERIA DEL EVENTO AL CUAL SELECCIONAMOS EN LA VISTA Y PARA MOSTRAR LAS FOTOS DE LA GALERIA
+
+        $nuevos = Evento::find($evento);
+        
+        $fotografos = $nuevos->fotografos;
+        
+        // dd($fotografos);
+        
+        return view('eventos.actividad',compact('fotografos','evento'));
+        
+
+
+    }
+
+
+    public function fotos($fotografo,$evento){
+
+        $fotos = Foto::where('evento_id','=',$evento)->where('fotografo_id','=',$fotografo)->get();
+
+        return view('eventos.galeria',compact('fotos'));
+        
     }
 
     /**
@@ -82,4 +150,7 @@ class EventoController extends Controller
     {
         //
     }
+
+
+   
 }

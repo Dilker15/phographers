@@ -19,4 +19,12 @@ class Invitado extends Model
         'apellidos',
         'foto_perfil'
     ];
+
+
+
+    public function getSexoDadoAttribute(){
+        $datos = ['Mujer','Hombre'];
+        return $datos[$this->attributes['sexo']];
+
+    }
 }

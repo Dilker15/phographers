@@ -4,6 +4,7 @@ namespace App\Models\Fotografo;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Evento\Evento;
 
 class Fotografo extends Model
 {
@@ -21,4 +22,16 @@ class Fotografo extends Model
         'sexo',
         'tipo'
     ];
+
+
+
+
+        public function eventos(){
+        
+            return $this->belongsToMany(Evento::class,'evento_fotografos');
+            
+        }
+
+
+    
 }

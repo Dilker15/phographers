@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Fotografo;
+namespace App\Http\Controllers\Invitacion;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Fotografo\Fotografo;
-use App\Models\Foto\Foto;
 
-class FotografoController extends Controller
+class InvitacionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +14,7 @@ class FotografoController extends Controller
      */
     public function index()
     {
-        $fotografo = Fotografo::where("id","=",auth()->user()->invitado_id)->get()->first();
-
-        $eventos = $fotografo->eventos;
-
-        return view('fotografos.index',compact('eventos','fotografo'));
-
-
+        //
     }
 
     /**
@@ -52,30 +44,11 @@ class FotografoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($fotografo)
+    public function show($id)
     {
-        
+        //
     }
 
-
-
-    public function actividad($evento,$fotografo){
-
-        
-        $fotos = Foto::where('evento_id','=',$evento)->where('fotografo_id','=',$fotografo)->get();
-        
-        return view('fotografos.galeria',compact('fotos'));
-
-    }
-
-    
-
-
-    public function subirFotos($fotografo,$evento){
-
-        return view('fotografos.subirFotos',compact('fotografo','evento'));
-
-    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -107,6 +80,6 @@ class FotografoController extends Controller
      */
     public function destroy($id)
     {
-        
+        //
     }
 }

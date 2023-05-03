@@ -15,13 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->foreignId('role_id')->nullable();
+            $table->foreignId('invitado_id')->nullable();
+            // $table->foreignId('invitado_id')->constrained(
+            //     table:'invitados'
+            // )->nullable();
+            $table->unsignedSmallInteger('tipo_user')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
-            $table->foreingId('invitado_id')->constrained(
-                table:'invitados'
-            );
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
         });

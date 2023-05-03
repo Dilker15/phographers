@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controller\Fotografo\FotografoController;
+use App\Http\Controllers\Fotografo\FotografoController;
 
 
 
@@ -21,6 +21,13 @@ Route::prefix('fotografos-Estudios')->name('fotografos.')->middleware(['auth'])-
         Route::delete('delete/{fotografo}',[FotografoController::class,'destroy'])->name('destroy');
 
         Route::put('/update/{fotografo}',[FotografoController::class,'update'])->name('update');
+
+        Route::get('/fotografo/actividad/{evento}/{fotografo}',[FotografoController::class,'actividad'])->name('actividad');
+
+
+        Route::get('/agregarFotos/Evento/{fotografo}/{evento}',[FotografoController::class,'subirFotos'])->name('subirFotos');
+
+
 
 
 

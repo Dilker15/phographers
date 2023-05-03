@@ -21,7 +21,7 @@ return new class extends Migration
             $table->String('email')->unique();
             $table->String('telefono');
             $table->unsignedSmallInteger('estudio')->default(0);
-            $table->unsignedSmallIntegeR('tipo')->default('2');
+            $table->unsignedSmallIntegeR('tipo')->default(1);
             $table->unsignedSmallInteger('sexo')->default(1);
             $table->timestamps();
         });

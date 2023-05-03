@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Invitado;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Invitado\Invitado;
 
 class InvitadoController extends Controller
 {
@@ -14,7 +15,10 @@ class InvitadoController extends Controller
      */
     public function index()
     {
-        //
+        $invitado = Invitado::where('id','=',auth()->user()->invitado_id)->get()->first();
+
+        dd($invitado);
+        return view('invitados.index',compact('invitado'));
     }
 
     /**
@@ -24,7 +28,7 @@ class InvitadoController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -35,7 +39,7 @@ class InvitadoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -55,9 +59,10 @@ class InvitadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($invitado)
     {
-        //
+       $datos = Invitado::where('id','=',$invitado)->get()->first();
+       return view('invitados.edit',compact('datos'));
     }
 
     /**
@@ -67,9 +72,19 @@ class InvitadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $invitado)
     {
-        //
+
+        //dd($request);
+
+        $datos = $request->all();
+
+        
+        $nuevoInvitado = Invitado::find($invitado)->get()->first();
+        
+        $nuevoInvitado->update($datos);
+        echo($nuevoInvitado);
+        //dd($invitado);
     }
 
     /**
@@ -78,7 +93,7 @@ class InvitadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($invitado)
     {
         //
     }

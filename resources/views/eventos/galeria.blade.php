@@ -3,13 +3,13 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>FOTOGRAFOS DEL EVENTO</h1>
 @stop
 
 @section('content')
 
 <div class="card-bodys">
-    <a href="{{route('evento.create')}}" class="btn btn-success btn-sm">Crear Evento</a>
+    {{-- <a href="{{route('evento.create')}}" class="btn btn-success btn-sm">Crear Evento</a> --}}
 </div>
     
 
@@ -17,23 +17,11 @@
 <div class="grilla">
 
   
-    @foreach($eventos as $evento)
+    @foreach($fotos as $foto)
 
   
     <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="https://placeimg.com/640/480/tech" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">{{$evento->nombre}}</h5>
-          <p class="card-text">{{$evento->descripcion}}</p>
-
-          <div class="container2">
-            <a href="{{route('evento.show',$evento->id)}}" class="btn btn-primary">Ver</a>
-            <a href="{{route('evento.actividad',$evento->id)}}" class="btn btn-primary">Ver</a>
-          </div>
-         
-
-        </div>
-    </div>
+       <a href=""  class="showImage"> <img class="card-img-top" src="{{$foto->url}}" alt="Card image cap"></a>    </div>
 
     @endforeach
 
@@ -79,17 +67,30 @@
             gap:20px;
             margin-top:3rem;
             padding:2rem;
+            
             /* background-color:gray; */
         }
 
-        .card-bodys{
-          
+        .showImage:hover{
+          transform:scale(1.3);
+          z-index:99999999;
         }
 
         .container2{
           display:flex;
           justify-content:center;
           gap:1rem;
+        }
+
+        .showImage img{
+          width: 100%;
+          height:auto;
+          object-fit: cover;
+        }
+
+        .card{
+          column:20px;
+          border:1xp black solid;
         }
     </style>
 @stop
