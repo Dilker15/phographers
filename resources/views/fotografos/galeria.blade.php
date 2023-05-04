@@ -9,7 +9,7 @@
 @section('content')
 
 <div class="card-bodys">
-    <a href="{{route('fotografos.subirFotos')}}" class="btn btn-success btn-sm float-right"><i class="fa fa-plus"></i>Agregar Fotos</a>
+    <a href="{{route('fotografos.create')}}" class="btn btn-sm btn-success">Añadir fotos</a>
 </div>
     
 

@@ -64,6 +64,7 @@ class FotografoController extends Controller
         
         $fotos = Foto::where('evento_id','=',$evento)->where('fotografo_id','=',$fotografo)->get();
         
+        
         return view('fotografos.galeria',compact('fotos'));
 
     }
@@ -71,9 +72,9 @@ class FotografoController extends Controller
     
 
 
-    public function subirFotos($fotografo,$evento){
+    public function subirFotos(){
 
-        return view('fotografos.subirFotos',compact('fotografo','evento'));
+        return view('fotografos.subirFotos');
 
     }
     /**
