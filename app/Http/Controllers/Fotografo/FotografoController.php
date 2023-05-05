@@ -32,7 +32,7 @@ class FotografoController extends Controller
      */
     public function create()
     {
-        //
+        dd("hola");
     }
 
     /**
@@ -65,7 +65,7 @@ class FotografoController extends Controller
         $fotos = Foto::where('evento_id','=',$evento)->where('fotografo_id','=',$fotografo)->get();
         
         
-        return view('fotografos.galeria',compact('fotos'));
+        return view('fotografos.galeria',compact('fotos','evento','fotografo'));
 
     }
 
