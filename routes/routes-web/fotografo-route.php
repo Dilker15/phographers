@@ -24,7 +24,15 @@ Route::prefix('fotografos-Estudios')->name('fotografos.')->middleware(['auth'])-
 
         Route::get('/fotografo/actividad/{evento}/{fotografo}',[FotografoController::class,'actividad'])->name('actividad');
 
-        Route::get('/datos/mostrar',[FotografoController::class,'subirFotos'])->name('subirFotos');
+  
+
+
+
+        Route::get('/caroFotos/{evento}/{fotografo}',[FotografoController::class,'cargarFotos'])->name('subirFotos');
+
+
+
+        Route::post('/guardandoFotos',[FotografoController::class,'almacenar'])->name('guar');
 
 
         

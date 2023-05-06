@@ -14,9 +14,10 @@ class Foto extends Model
 
 
     protected $fillable =[
-        'galeria_id',
-        'precio',
+        'fotografo_id',
+        'evento_id',
         'url',
-        'tipo'
+        'precio',
+        'tipo',
     ];
 }

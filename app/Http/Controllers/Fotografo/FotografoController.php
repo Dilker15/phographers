@@ -43,7 +43,31 @@ class FotografoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $request->validate([
+        //     'file' => 'required|image|max:2048'
+        // ]);
+
+        // // $foto = Foto::create([
+        // //     'evento_id' => 1111,
+        // //     'fotografo_id' => 1111,
+        // //     'url' => "no existe la foto",
+        // //     'precio' => 1111
+
+        // // ]);
+
+
+        // $imagenes = $request->file('file')->store('public/imagenes');
+
+        // // $foto = Foto::create([
+        // //     'evento_id' => 1111,
+        // //     'fotografo_id' => 1111,
+        // //     'url' => "no existe la foto",
+        // //     'precio' => 1111
+
+        // // ]);
+
+        // //$url = Storage::url($imagenes);
+
     }
 
     /**
@@ -72,9 +96,38 @@ class FotografoController extends Controller
     
 
 
-    public function subirFotos(){
+    public function cargarFotos($evento,$fotografo){
 
-        return view('fotografos.subirFotos');
+
+        return view('fotografos.subirFotos',compact('evento','fotografo'));
+
+    }
+
+
+
+    public function almacenar(Request $request){
+
+        // $request->validate([
+        //     'file' => 'required|image|max:2048'
+        // ]);
+
+        $evento=$request['evento'];
+        $fotografo = $request['fotografo'];
+        $foto= new Foto();
+        $foto->precio=66;
+        $foto->evento_id=$evento; 
+        $foto->fotografo_id=$fotografo;
+        $foto->url="nueva";
+        $foto->tipo=0;
+        $foto->save();
+        $imagenes = $request->file('file');
+
+        $imagenes->store('public/imagenes');
+            
+     
+
+
+        
 
     }
     /**
