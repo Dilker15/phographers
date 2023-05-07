@@ -32,7 +32,7 @@ class FotografoController extends Controller
      */
     public function create()
     {
-        dd("hola");
+        return view('fotografos.create');
     }
 
     /**
@@ -43,6 +43,8 @@ class FotografoController extends Controller
      */
     public function store(Request $request)
     {
+
+        dd('aqui se crea');
         // $request->validate([
         //     'file' => 'required|image|max:2048'
         // ]);
@@ -68,6 +70,19 @@ class FotografoController extends Controller
 
         // //$url = Storage::url($imagenes);
 
+    }
+
+
+    public function grilla(){
+        $fotografos = Fotografo::get();
+
+        return view('fotografos.grilla',compact('fotografos'));
+    }
+
+
+    public function catalogo($fotografo){
+
+        return view('fotografos.catalogo',compact('fotografo'));
     }
 
     /**

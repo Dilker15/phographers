@@ -10,9 +10,9 @@ Route::prefix('fotografos-Estudios')->name('fotografos.')->middleware(['auth'])-
 
         Route::get('/',[FotografoController::class,'index'])->name('index');
 
-        Route::get('/create',[FotografoController::class,'create'])->name('create');
+        // Route::get('/create',[FotografoController::class,'create'])->name('create');
 
-        Route::post('/store/nuevo',[FotografoController::class,'store'])->name('store');
+        // Route::post('/store/nuevo',[FotografoController::class,'store'])->name('store');
 
         Route::get('/show/{fotografo}',[FotografoController::class,'show'])->name('show');
 
@@ -24,7 +24,11 @@ Route::prefix('fotografos-Estudios')->name('fotografos.')->middleware(['auth'])-
 
         Route::get('/fotografo/actividad/{evento}/{fotografo}',[FotografoController::class,'actividad'])->name('actividad');
 
-  
+        
+
+        // Route::get('/principal',[FotografoController::class,'grilla'])->name('princ');
+        
+
 
 
 

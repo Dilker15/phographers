@@ -13,7 +13,7 @@ Route::prefix('invitado')->name('invitado.')->middleware(['auth'])->group(functi
 
         Route::get('/',[InvitadoController::class,'index'])->name('index');
 
-        Route::get('/create',[InvitadoController::class,'store'])->name('create');
+        // Route::get('/create',[InvitadoController::class,'store'])->name('create');
 
         Route::get('/edit/{invitado}',[InvitadoController::class,'edit'])->name('edit');
 

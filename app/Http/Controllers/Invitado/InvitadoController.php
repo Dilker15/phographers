@@ -17,7 +17,6 @@ class InvitadoController extends Controller
     {
         $invitado = Invitado::where('id','=',auth()->user()->invitado_id)->get()->first();
 
-        dd($invitado);
         return view('invitados.index',compact('invitado'));
     }
 
@@ -28,7 +27,7 @@ class InvitadoController extends Controller
      */
     public function create()
     {
-        
+        return view('invitados.create');
     }
 
     /**
@@ -39,7 +38,7 @@ class InvitadoController extends Controller
      */
     public function store(Request $request)
     {
-        
+        dd("se mnada aqui");
     }
 
     /**

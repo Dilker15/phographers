@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Fotografo\FotografoController;
+use App\Http\Controllers\Invitado\InvitadoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,3 +27,20 @@ Route::middleware([
         return view('main');
     })->name('main');
 });
+
+
+Route::get('/principal',[FotografoController::class,'grilla'])->name('princ');
+
+
+Route::get('/albun/{fotografo}',[FotografoController::class,'catalogo'])->name('catalogos');
+
+
+
+Route::get('/crearFotografo',[FotografoController::class,'create'])->name('crearFotografo');
+
+
+Route::post('/store/Fotografo',[FotografoController::class,'store'])->name('storeFotografo');
+
+Route::get('/crearInvitado',[InvitadoController::class,'create'])->name('crearInvitado');
+
+Route::post('/store/Invitado',[InvitadoController::class,'store'])->name('storeInvitado');

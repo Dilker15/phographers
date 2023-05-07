@@ -33,5 +33,15 @@ class Fotografo extends Model
         }
 
 
+
+
+        public function getSexoFotografoAttribute(){
+
+            $datos = ['Femenino','Masculino'];
+
+            return $datos[$this->attributes['sexo']];
+        }
+
+
     
 }
