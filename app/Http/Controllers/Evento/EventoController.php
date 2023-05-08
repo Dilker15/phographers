@@ -10,6 +10,8 @@ use App\Models\Invitacion\Invitacion;
 use App\Models\EventoFotografo\EventoFotografo;
 use App\Models\Foto\Foto;
 
+use App\Models\Invitado\Invitado;
+
 class EventoController extends Controller
 {
     /**
@@ -55,12 +57,11 @@ class EventoController extends Controller
             'descripcion' => $datos['descripcion'],
             'fecha_evento' => $datos['fecha'],
             'hora_evento' => $datos['hora'],
-            'invitado_id' => auth()->id(),
+            'invitado_id' => auth()->user()->invitado_id,
             'ubicacion' => $datos['direccion'],
             'estado' => 1
         ]);
 
-        // dd(count($fotografos));
 
 
      for( $i=0;$i<count($fotografos);$i++){
@@ -72,8 +73,8 @@ class EventoController extends Controller
         ]);
         
      }
-       
-        // dd($evento);
+     $invitado = Invitado::where('id','=',auth()->user()->invitado_id)->get()->first();
+        return view('invitados.index',compact('invitado'));
     }
 
     /**

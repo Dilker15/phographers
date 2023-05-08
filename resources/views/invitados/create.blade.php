@@ -51,9 +51,9 @@
     </style>
     <script> 
         function mostrar(){
-            var archivo = document.getElementById("file").files[0];
+            var archivo = document.getElementById("imagen").files[0];
             var reader = new FileReader();
-            if (file) {
+            if (imagen) {
                 reader.readAsDataURL(archivo );
                 reader.onloadend = function () {
                 document.getElementById("img").src = reader.result;
@@ -98,15 +98,15 @@
                 <div class="form-group">
                   <label for="sexo"><strong>Sexo:</strong></label>
                   <select class="form-control" id="sexo" name="sexo">
-                    <option value="1">Femenino</option>
-                    <option value="2">Masculino</option>
+                    <option value="0">Femenino</option>
+                    <option value="1">Masculino</option>
                   </select>
                  
                 </div>
 
                 <div class="form-group">
                     <label for="file"><strong>Foto Perfil:</strong></label>
-                    <input type="file" id="file" name="file" class="form-control" onchange="mostrar()">
+                    <input type="file" id="imagen" name="imagen" class="form-control" onchange="mostrar()">
                 </div>
 
 

@@ -331,7 +331,7 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'Perfil-Invitado',
+            'text' => 'Perfil-Fotografo',
              'route' =>'evento.index',
             'icon' => 'fas fa-fw fa-user',
         ],
@@ -341,8 +341,8 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
+            'text' => 'Invitaciones',
+            'route'  => 'fotografos.solicitudes',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [

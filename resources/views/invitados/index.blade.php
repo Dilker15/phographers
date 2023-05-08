@@ -24,9 +24,9 @@
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                    <img src="{{asset('storage/perfiles-invitados/'.''.$invitado->foto_perfil)}}" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
-                      <h4>nada</h4>
+                      <h4>{{$invitado->nombre}}</h4>
                       {{-- <p class="text-secondary mb-1">Full Stack Developer</p>
                       <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
                       --}}
@@ -76,11 +76,11 @@
                     </div>
                   </div>
                   <hr>
-                  <div class="row">
+                  {{-- <div class="row">
                     <div class="col-sm-12">
                       <a class="btn btn-info" href="{{route('invitado.edit',$invitado)}}">Editar</a>
                     </div>
-                  </div>
+                  </div> --}}
                 </div>
               </div>
 

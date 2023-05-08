@@ -17,7 +17,8 @@ class Invitado extends Model
         'email',
         'tipo',
         'apellidos',
-        'foto_perfil'
+        'foto_perfil',
+        'telefono'
     ];
 
 

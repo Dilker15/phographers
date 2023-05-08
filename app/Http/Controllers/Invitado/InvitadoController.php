@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Invitado;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Invitado\Invitado;
+use App\Models\User;
+
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 
 class InvitadoController extends Controller
 {
@@ -16,7 +20,8 @@ class InvitadoController extends Controller
     public function index()
     {
         $invitado = Invitado::where('id','=',auth()->user()->invitado_id)->get()->first();
-
+        
+        
         return view('invitados.index',compact('invitado'));
     }
 
@@ -38,7 +43,35 @@ class InvitadoController extends Controller
      */
     public function store(Request $request)
     {
-        dd("se mnada aqui");
+            if($request->hasFile('imagen')){
+
+                $imagen =$request->file('imagen');
+                $nombre =time().'.'.$imagen->extension();
+                Storage::putFileAs('public/perfiles-invitados',new File($imagen),$nombre);
+          
+            }
+
+            $invitado = Invitado::create([
+                'nombre' => $request['nombre'],
+                'apellidos' => $request['apellidos'],
+                'email' => $request['email'],
+                'foto_perfil' => $nombre,
+                'telefono' => $request['telefono'],
+                'tipo' => 1,
+                'sexo' => $request['sexo'],
+            ]);
+
+
+            $usuario = User::create([
+                'name' => $request['nombre'],
+                'email' => $request['email'],
+                'role_id' => 1,
+                'invitado_id' => $invitado->id,
+                'tipo_user' => 2,
+                'password' => bcrypt($request['password']),
+            ]); 
+
+            return view('welcome');
     }
 
     /**
@@ -82,7 +115,7 @@ class InvitadoController extends Controller
         $nuevoInvitado = Invitado::find($invitado)->get()->first();
         
         $nuevoInvitado->update($datos);
-        echo($nuevoInvitado);
+        return view('invitados.index');
         //dd($invitado);
     }
 

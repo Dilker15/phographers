@@ -28,7 +28,7 @@
           
         }
 
-        .imagen img{
+        .imagen-cont img{
             width:100%;
             height:100%;
             object-fit:cover;
@@ -51,9 +51,9 @@
     </style>
     <script> 
         function mostrar(){
-            var archivo = document.getElementById("file").files[0];
+            var archivo = document.getElementById("imagen").files[0];
             var reader = new FileReader();
-            if (file) {
+            if (imagen) {
                 reader.readAsDataURL(archivo );
                 reader.onloadend = function () {
                 document.getElementById("img").src = reader.result;
@@ -67,13 +67,14 @@
 <body>
 
     <div id="formulario">
-        <div class="imagen">
+        <div class="imagen-cont">
             <img id="img">
         </div>
         <div class="imagen"> 
             <form action="{{route('storeFotografo')}}" method="POST" enctype="multipart/form-data">
                 @method('POST')
                 @csrf
+
                 <div class="form-group">
                   <label for="nombre"><strong>Nombre:</strong></label>
                   <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese su nombre" required>
@@ -98,20 +99,21 @@
                 <div class="form-group">
                   <label for="sexo"><strong>Sexo:</strong></label>
                   <select class="form-control" id="sexo" name="sexo">
-                    <option value="1">Femenino</option>
-                    <option value="2">Masculino</option>
+                    <option value="0">Femenino</option>
+                    <option value="1">Masculino</option>
+
                   </select>
                  
                 </div>
 
                 <div class="form-group">
                     <label for="file"><strong>Foto Perfil:</strong></label>
-                    <input type="file" id="file" name="file" class="form-control" onchange="mostrar()">
+                    <input type="file" id="imagen" name="imagen" class="form-control" onchange="mostrar()">
                 </div>
 
 
                 <div class="form-group registro">
-                    <input type="submit" id="submit" name="submit" value="Registrar" class=" form-control btn-sm btn-warning mt-4">
+                    <input type="submit" class="form-control btn-sm btn-warning mt-4">
                 </div>
 
                 

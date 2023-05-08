@@ -36,7 +36,9 @@
 
 .card img{
     width:100%;
-    height: auto;
+    height:200px;
+    object-fit: cover;
+    
    
 }
 
@@ -80,6 +82,7 @@ body{
     margin:auto;
     display:grid;
     grid-template-columns:repeat(3,1fr);
+    row-gap: 2rem;
 }
 
 
@@ -175,18 +178,18 @@ body{
             @foreach($fotografos as $fotografo)
 
             <div class="col-md-4">
-                <div class="card" style="width: 15rem;">
-            <img src="https://th.bing.com/th/id/R.4d66329e5ef53cb1ea96820a17d8480b?rik=4jQMqE550cvehg&riu=http%3a%2f%2ftusimagenesde.com%2fwp-content%2fuploads%2f2014%2f09%2ffotos-de-famosos-2.jpg&ehk=LKjEBBew0sLihnNIM3qrts5WMe%2bBb%2bMQcclRCoJhy7U%3d&risl=&pid=ImgRaw&r=0" class="card-img-top" alt="perfil">
-            <div class="informacion">
-              <p class="nombre">{{$fotografo->nombre.' '.$fotografo->apellidos}}</p>
-              <p class="apellido">Sexo: {{$fotografo->sexo_fotografo}}</p>
-              <p class="telefono">Telefono: {{$fotografo->telefono}}</p>
-              <div class="botones"> 
-                <a href="{{route('catalogos',$fotografo->id)}}"><i class="fas fa-link"></i>Catalogo</a>
-              </div>
-             
-            </div>
-            </div>
+                    <div class="card" style="width: 15rem;">
+                        <img src="{{asset('storage/perfiles-fotografos/'.''.$fotografo->foto_perfil)}}" alt="{{$fotografo->foto_perfil}}">
+                        <div class="informacion">
+                            <p class="nombre">{{$fotografo->nombre.' '.$fotografo->apellidos}}</p>
+                            <p class="apellido">Sexo: {{$fotografo->sexo_fotografo}}</p>
+                            <p class="telefono">Telefono: {{$fotografo->telefono}}</p>
+                            <div class="botones"> 
+                                <a href="{{route('catalogos',$fotografo->id)}}"><i class="fas fa-link"></i>Catalogo</a>
+                            </div>
+                            
+                        </div>
+                    </div>
               </div> 
             @endforeach
     </div>

@@ -5,6 +5,7 @@ namespace App\Models\Fotografo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Evento\Evento;
+use App\Models\Invitacion\Invitacion;
 
 class Fotografo extends Model
 {
@@ -40,6 +41,12 @@ class Fotografo extends Model
             $datos = ['Femenino','Masculino'];
 
             return $datos[$this->attributes['sexo']];
+        }
+
+
+
+        public function invitaciones(){
+            return $this->hasMany(Invitacion::class);
         }
 
 

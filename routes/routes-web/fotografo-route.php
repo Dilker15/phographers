@@ -29,8 +29,10 @@ Route::prefix('fotografos-Estudios')->name('fotografos.')->middleware(['auth'])-
         // Route::get('/principal',[FotografoController::class,'grilla'])->name('princ');
         
 
+        Route::get('/invitaciones',[FotografoController::class,'mostrarInvitaciones'])->name('solicitudes');
 
 
+        Route::post('propuestaInvitacion',[FotografoController::class,'registrar'])->name('aceptar');
 
         Route::get('/caroFotos/{evento}/{fotografo}',[FotografoController::class,'cargarFotos'])->name('subirFotos');
 
