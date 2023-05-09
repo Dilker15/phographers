@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Albun;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+// use App\Models\Albun\Albun;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Fotografo\Fotografo;
 
 class Albun extends Controller
 {
@@ -17,14 +21,31 @@ class Albun extends Controller
         //
     }
 
+
+
+    public function guar(Request $request){
+        $imagen = $request->file('file');
+        $nombre =time().'.'.$imagen->extension();
+        $id=$request['fotografo'];
+        // $fotografo =Fotografo::where('id','=',$id)->get()->first();
+        // $correo =$fotografo->email;
+        // $albun =Albun::create([
+        //     'fotografo_id' => $id,
+        //     'foto1' => $nombre,
+        // ]);
+        Storage::putFileAs('public/'.$id,new File($imagen),$nombre);
+
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($fotografo)
     {
-        //
+        return view('albunes.guardarFotos',compact('fotografo'));
     }
 
     /**
@@ -57,7 +78,7 @@ class Albun extends Controller
      */
     public function edit($id)
     {
-        //
+        //gffgdsgfdfasdf
     }
 
     /**

@@ -12,8 +12,10 @@ Route::prefix('albune')->name('albun.')->middleware(['auth'])->group(function(){
     Route::get('/show/{albun}',[Albun::class,'show'])->name('show');
 
 
-    Route::get('/create',[Albun::class,'create'])->name('create');
+    Route::get('/create/{fotografo}',[Albun::class,'create'])->name('create');
 
+
+    Route::post('guardarFotos',[Albun::class,'guar'])->name('guar');
 
     Route::post('/store',[Albun::class,'store'])->name('store');
 

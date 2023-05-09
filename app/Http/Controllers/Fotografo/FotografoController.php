@@ -9,6 +9,7 @@ use App\Models\Foto\Foto;
 use App\Models\User;
 use App\Models\Invitacion\Invitacion;
 use App\Models\EventoFotografo\EventoFotografo;
+use App\Models\Albun\Albun;
 
 
 use Illuminate\Http\File;
@@ -127,9 +128,24 @@ class FotografoController extends Controller
      */
     public function show($fotografo)
     {
+
         
     }
 
+
+    public function verPerfil(){
+        $fotografo = Fotografo::where('id','=',auth()->user()->invitado_id)->get()->first();
+
+        return view('fotografos.perfil',compact('fotografo'));
+    }
+
+
+
+    public function verAlbun($fotografo){
+        $albun = Albun::where('id','=',$fotografo)->get();
+
+        return view('fotografos.albun',compact('albun','fotografo'));
+    }
 
 
     public function actividad($evento,$fotografo){
@@ -155,27 +171,25 @@ class FotografoController extends Controller
 
 
     public function almacenar(Request $request){
-
-        // $request->validate([
-        //     'file' => 'required|image|max:2048'
-        // ]);
-
-        $evento=$request['evento'];
-        $fotografo = $request['fotografo'];
-        $foto= new Foto();
-        $foto->precio=66;
-        $foto->evento_id=$evento; 
-        $foto->fotografo_id=$fotografo;
-        $foto->url="nueva";
-        $foto->tipo=0;
-        $foto->save();
-        $imagenes = $request->file('file');
-
-        $imagenes->store('public/imagenes');
-            
-     
+        $imagen = $request->file('file');
+        $nombre =time().'.'.$imagen->extension();
 
 
+        $foto = Foto::create([
+            'fotografo_id' => $request['fotografo'],
+            'evento_id'=>$request['evento'],
+            'precio' => 666.00,
+            'url' => $nombre,
+
+         ]);
+       
+
+        
+        // $nombre =time().'.'.$imagen->extension();
+        Storage::putFileAs('public/eventos',new File($imagen),$nombre);
+       
+         
+        
         
 
     }

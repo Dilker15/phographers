@@ -3,27 +3,21 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Subir Fotos</h1>
+    <h1>Crear Albun Personal</h1>
 
 @stop
 
 @section('content')
 
 <div class="card-bodys">
-    <a href="{{route('fotografos.index')}}" class="btn btn-sm btn-success">Volver</a>
+    <a href="{{route('albun.index')}}" class="btn btn-sm btn-success">Volver</a>
 </div>
     
-<form action="{{route('fotografos.guar')}}"
-     enctype="multipart/form-data"
+<form action="{{route('albun.guar')}}"
       method="POST"
       class="dropzone"
       id="my-awesome-dropzone">
-      @method('POST')
-      @csrf
-    
     <input type="text" value="{{$fotografo}}" name="fotografo" id="fotografo" hidden>
-    <input type="text" value="{{$evento}}" name="evento" id="evento" hidden>
-    
 </form>
 
 
@@ -48,7 +42,7 @@
             dictDefaultMessage: "Subir Imagenes Aqui",
             addRemoveLinks: true,
             acceptedFiles: "image/*",
-            maxFilesize:6,
+            //maxFilesize: 2,
             maxFiles: 10,
         };
       </script>

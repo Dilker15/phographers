@@ -3,38 +3,19 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Mis fotos</h1>
+    <h1>Mi Albun Personal</h1>
 @stop
 
 @section('content')
 
 <div class="card-bodys">
-    <a href="{{route('fotografos.subirFotos',[$evento,$fotografo])}}" class="btn btn-sm btn-success">Añadir fotos</a>
+    <a href="{{route('albun.create',$fotografo)}}" class="btn btn-success btn-sm">Crear Albun</a>
 </div>
     
 
  
 <div class="grilla">
-
-  
-    @foreach($fotos as $foto)
-
-  
-    <div class="card" style="width: 18rem;">
-       <div class="fotografia"> 
-        <img class="card-img-top" src="{{asset('storage/eventos/'.''.$foto->url)}}" alt="Card image cap">
-       </div>
-        
-        {{-- <div class="card-body">
-         
-         
-
-        </div> --}}
-    </div>
-
-    @endforeach
-
-      
+    
 
 </div>
 
@@ -61,13 +42,6 @@
           display:flex;
           justify-content:center;
           gap:1rem;
-        }
-
-
-        .fotografia img{
-            width:100%;
-            height:250px;
-            object-fit: cover;
         }
     </style>
 @stop

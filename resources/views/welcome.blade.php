@@ -153,7 +153,12 @@
             }
 
 
-           
+           .loguearse
+           {
+            color:#39B5E0;
+            font-size:1.5rem;
+            text-decoration:none;
+           }
 
 
            
@@ -167,7 +172,7 @@
               @auth
                   <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Dashboard</a>
               @else
-                  <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
+                  <a href="{{ route('login') }}" class="text-sm text-gray-700 underline loguearse">Ingresar</a>
 
                   {{-- @if (Route::has('register'))
                       <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>

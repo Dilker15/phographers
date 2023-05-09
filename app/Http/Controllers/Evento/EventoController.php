@@ -23,6 +23,7 @@ class EventoController extends Controller
     {
         $eventos = Evento::where('invitado_id','=',auth()->user()->invitado_id)->get();
        
+        
        
         return view('eventos.index',compact('eventos'));
     }
@@ -102,6 +103,8 @@ class EventoController extends Controller
         $fotografos = $nuevos->fotografos;
         
         // dd($fotografos);
+
+        
         
         return view('eventos.actividad',compact('fotografos','evento'));
         
@@ -113,7 +116,9 @@ class EventoController extends Controller
     public function fotos($fotografo,$evento){
 
         $fotos = Foto::where('evento_id','=',$evento)->where('fotografo_id','=',$fotografo)->get();
-
+        
+        // AQUI SE HACE LA COMPARACION DE LA FOTO DEL EVENTO CON LA DEL PERFIL DEL USUARIO O INVITADO
+        
         return view('eventos.galeria',compact('fotos'));
         
     }

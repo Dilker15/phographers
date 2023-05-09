@@ -21,36 +21,11 @@
 
   
     <div class="card" style="width: 18rem;">
-       <a href=""  class="showImage"> <img class="card-img-top" src="{{$foto->url}}" alt="Card image cap"></a>    </div>
+      <img class="card-img-top" src="{{asset('storage/eventos/'.''.$foto->url)}}" alt="Card image cap">  
+    </div>
 
     @endforeach
 
-      {{-- <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{asset('descargar1.jpg')}}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{asset('descargar2.jpg')}}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{asset('descargar1.jpg')}}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div> --}}
     
 
 </div>
@@ -76,21 +51,10 @@
           z-index:99999999;
         }
 
-        .container2{
-          display:flex;
-          justify-content:center;
-          gap:1rem;
-        }
-
-        .showImage img{
-          width: 100%;
-          height:auto;
-          object-fit: cover;
-        }
-
-        .card{
-          column:20px;
-          border:1xp black solid;
+        .card img{
+          width:100%;
+          height: 250px;
+          object-fit:cover;
         }
     </style>
 @stop

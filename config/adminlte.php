@@ -332,7 +332,7 @@ return [
         ],
         [
             'text' => 'Perfil-Fotografo',
-             'route' =>'evento.index',
+             'route' =>'fotografos.perfil',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

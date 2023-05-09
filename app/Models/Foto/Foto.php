@@ -20,4 +20,7 @@ class Foto extends Model
         'precio',
         'tipo',
     ];
+
+
+    
 }

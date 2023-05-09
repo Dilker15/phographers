@@ -14,6 +14,11 @@ Route::prefix('fotografos-Estudios')->name('fotografos.')->middleware(['auth'])-
 
         // Route::post('/store/nuevo',[FotografoController::class,'store'])->name('store');
 
+        Route::get('perfilFotografo',[FotografoController::class,'verPerfil'])->name('perfil');
+
+        Route::get('albunFotografo/{Fotografo}',[FotografoController::class,'verAlbun'])->name('albun');
+
+
         Route::get('/show/{fotografo}',[FotografoController::class,'show'])->name('show');
 
         Route::get('/edit/{fotografo}',[FotografoController::class,'edit'])->name('edit');
