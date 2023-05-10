@@ -12,6 +12,8 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    <link href="bootstrap/css/booystrap.min.css" rel="stylesheet" type="text/css">
+
 @stop
 
 @section('js')
