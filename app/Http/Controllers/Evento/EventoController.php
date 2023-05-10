@@ -9,6 +9,9 @@ use App\Models\Evento\Evento;
 use App\Models\Invitacion\Invitacion;
 use App\Models\EventoFotografo\EventoFotografo;
 use App\Models\Foto\Foto;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
+
 
 use App\Models\Invitado\Invitado;
 
@@ -118,6 +121,43 @@ class EventoController extends Controller
         $fotos = Foto::where('evento_id','=',$evento)->where('fotografo_id','=',$fotografo)->get();
         
         // AQUI SE HACE LA COMPARACION DE LA FOTO DEL EVENTO CON LA DEL PERFIL DEL USUARIO O INVITADO
+
+        // $nombre1 ="dilker1.jpg";
+        // $nombre2 ="dilker2.jpg";
+        // $imagen1 =fopen(public_path('storage/eventos/'.''.$nombre1),'r');
+        // $imagen2 =fopen(public_path('storage/eventos/'.''.$nombre1),'r');
+
+        // $size = Storage::size('storage/eventos/'.''.$imagen1);
+        // Storage::setVisibility('storage/eventos/'.''.$nombre1, 'public');
+
+        // $visibility = Storage::getVisibility('storage/eventos/'.''.$nombre1);
+
+        // $name = Input::file(public_path('storage/eventos/'.''.$nombre1))->getClientOriginalName();
+        // dd($visibility);
+        
+        $respuestaApi = Http::post('https://a26c-181-115-208-202.ngrok.io/compare',[
+            "image1"=>"https://res.cloudinary.com/dirau81x6/image/upload/v1683673109/mtbi8rr676bzaw6pum9h.jpg",
+            "image2"=>"https://res.cloudinary.com/dirau81x6/image/upload/v1682963189/cld-sample.jpg"
+        ]);
+
+        
+        // if($respuestaApi->body()){
+        //     $n = strlen(var_dump($respuestaApi->body()));
+        //     dd($n);
+        //     dd($respuestaApi->body());
+        // }
+        dd($respuestaApi->body());
+        
+        $even = Evento::where('id','=',$evento)->get()->first();
+
+
+
+        $invitado =Invitado::find($even->invitado_id);
+
+        // dd($invitado->foto_perfil);
+
+
+
         
         return view('eventos.galeria',compact('fotos'));
         

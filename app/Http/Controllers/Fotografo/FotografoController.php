@@ -10,7 +10,7 @@ use App\Models\User;
 use App\Models\Invitacion\Invitacion;
 use App\Models\EventoFotografo\EventoFotografo;
 use App\Models\Albun\Albun;
-
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
@@ -74,18 +74,28 @@ class FotografoController extends Controller
      */
     public function store(Request $request)
     {
-            if($request->hasFile('imagen')){
-                $imagenes = $request->file('imagen');
+            // if($request->hasFile('imagen')){
+            //     $imagenes = $request->file('imagen');
              
-                $nombres=time().'.'.$imagenes->extension();
-                Storage::putFileAs('public/perfiles-fotografos',new File($imagenes),$nombres);
-            }
+            //     $nombres=time().'.'.$imagenes->extension();
+            //     Storage::putFileAs('public/perfiles-fotografos',new File($imagenes),$nombres);
+            // }
+
+            $imagen = $request->file('imagen');
+            // $nombre =time().'.'.$imagen->extension();
+    
+    
+            $fotoCloud =Cloudinary::upload($imagen->getRealPath(),['folders'=>'fotografos']);
+    
+            $public_id=$fotoCloud->getPublicId();
+            $url =$fotoCloud->getSecurePath();
+            
 
             $fotografo = Fotografo::create([
                 'nombre'=> $request['nombre'],
                 'apellidos' => $request['apellidos'],
                 'email'=> $request['email'],
-                'foto_perfil' =>$nombres,
+                'foto_perfil' =>$url,
                 'telefono' => $request['telefono'],
                 'tipo' => 2,
                 'sexo'=>$request['sexo'],
@@ -175,18 +185,22 @@ class FotografoController extends Controller
         $nombre =time().'.'.$imagen->extension();
 
 
+        $fotoCloud =Cloudinary::upload($imagen->getRealPath(),['folders'=>'fotografos']);
+
+        $public_id=$fotoCloud->getPublicId();
+        $url =$fotoCloud->getSecurePath();
+        
         $foto = Foto::create([
             'fotografo_id' => $request['fotografo'],
             'evento_id'=>$request['evento'],
-            'precio' => 666.00,
-            'url' => $nombre,
-
+            'precio' => 999.00,
+            'url' => $url,
          ]);
        
 
         
         // $nombre =time().'.'.$imagen->extension();
-        Storage::putFileAs('public/eventos',new File($imagen),$nombre);
+        // Storage::putFileAs('public/eventos',new File($imagen),$nombre);
        
          
         

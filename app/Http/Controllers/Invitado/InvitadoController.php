@@ -10,6 +10,8 @@ use App\Models\User;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+
 class InvitadoController extends Controller
 {
     /**
@@ -43,19 +45,26 @@ class InvitadoController extends Controller
      */
     public function store(Request $request)
     {
-            if($request->hasFile('imagen')){
+            // if($request->hasFile('imagen')){
 
-                $imagen =$request->file('imagen');
-                $nombre =time().'.'.$imagen->extension();
-                Storage::putFileAs('public/perfiles-invitados',new File($imagen),$nombre);
+            //     $imagen =$request->file('imagen');
+            //     $nombre =time().'.'.$imagen->extension();
+            //     Storage::putFileAs('public/perfiles-invitados',new File($imagen),$nombre);
           
-            }
+            // }
+
+            $imagen = $request->file('imagen');
+            $fotoCloud =Cloudinary::upload($imagen->getRealPath(),['folders'=>'fotografos']);
+    
+            $public_id=$fotoCloud->getPublicId();
+            $url =$fotoCloud->getSecurePath();
+            
 
             $invitado = Invitado::create([
                 'nombre' => $request['nombre'],
                 'apellidos' => $request['apellidos'],
                 'email' => $request['email'],
-                'foto_perfil' => $nombre,
+                'foto_perfil' => $url,
                 'telefono' => $request['telefono'],
                 'tipo' => 1,
                 'sexo' => $request['sexo'],

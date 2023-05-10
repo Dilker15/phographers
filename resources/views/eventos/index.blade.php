@@ -27,8 +27,8 @@
           <p class="card-text">{{$evento->descripcion}}</p>
 
           <div class="container2">
-            <a href="{{route('evento.show',$evento->id)}}" class="btn btn-primary">Ver</a>
-            <a href="{{route('evento.actividad',$evento->id)}}" class="btn btn-primary">Ver</a>
+            {{-- <a href="{{route('evento.show',$evento->id)}}" class="btn btn-primary">Ver</a> --}}
+            <a href="{{route('evento.actividad',$evento->id)}}" class="btn btn-primary">Ver Evento</a>
           </div>
          
 
