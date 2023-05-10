@@ -134,6 +134,8 @@ class EventoController extends Controller
         return view('eventos.edit',compact('id'));
     }
 
+    
+
     /**
      * Update the specified resource in storage.
      *
