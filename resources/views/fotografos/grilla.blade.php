@@ -177,9 +177,10 @@ body{
 
             @foreach($fotografos as $fotografo)
 
+            {{-- {{asset('storage/perfiles-fotografos/'.''.$fotografo->foto_perfil) --}}
             <div class="col-md-4">
                     <div class="card" style="width: 15rem;">
-                        <img src="{{asset('storage/perfiles-fotografos/'.''.$fotografo->foto_perfil)}}" alt="{{$fotografo->foto_perfil}}">
+                        <img src="{{$fotografo->foto_perfil}}" alt="fotografo">
                         <div class="informacion">
                             <p class="nombre">{{$fotografo->nombre.' '.$fotografo->apellidos}}</p>
                             <p class="apellido">Sexo: {{$fotografo->sexo_fotografo}}</p>

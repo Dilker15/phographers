@@ -22,8 +22,10 @@
   
     <div class="card" style="width: 18rem;">
        <div class="fotografia"> 
-        <img class="card-img-top" src="{{asset('storage/eventos/'.''.$foto->url)}}" alt="Card image cap">
+        <img class="card-img-top" src="{{$foto->url}}" alt="Card image cap">
        </div>
+
+       {{-- asset('storage/eventos/'.''.$foto->url) --}}
         
         {{-- <div class="card-body">
          
