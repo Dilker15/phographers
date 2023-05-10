@@ -122,7 +122,8 @@ class EventoController extends Controller
         
         // AQUI SE HACE LA COMPARACION DE LA FOTO DEL EVENTO CON LA DEL PERFIL DEL USUARIO O INVITADO
 
-        
+        $even = Evento::where('id','=',$evento)->get()->first();
+        $invitado =Invitado::find($even->invitado_id);
         
         $respuestaApi = Http::post('https://db0f-181-115-208-202.ngrok.io/compare',[
             "image1"=>"https://res.cloudinary.com/dirau81x6/image/upload/v1683673109/mtbi8rr676bzaw6pum9h.jpg",
@@ -138,11 +139,11 @@ class EventoController extends Controller
         }
         dd('no hay similitud');
         
-        $even = Evento::where('id','=',$evento)->get()->first();
+       
 
         
 
-        $invitado =Invitado::find($even->invitado_id);
+        
 
         // dd($invitado->foto_perfil);
 

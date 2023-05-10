@@ -41,8 +41,8 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/routes-web/albun-route.php'));
 
             
-            Route::middleware('web')
-                ->group(base_path('routes/routes-web/codigoQr-route.php'));
+            // Route::middleware('web')
+            //     ->group(base_path('routes/routes-web/codigoQr-route.php'));
 
 
                 Route::middleware('web')
