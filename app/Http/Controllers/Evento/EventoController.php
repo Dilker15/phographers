@@ -140,6 +140,7 @@ class EventoController extends Controller
             "image2"=>"https://res.cloudinary.com/dirau81x6/image/upload/v1682963189/cld-sample.jpg"
         ]);
 
+        
         // if($respuestaApi->body()){
         //     $n = strlen(var_dump($respuestaApi->body()));
         //     dd($n);
