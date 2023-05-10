@@ -122,35 +122,25 @@ class EventoController extends Controller
         
         // AQUI SE HACE LA COMPARACION DE LA FOTO DEL EVENTO CON LA DEL PERFIL DEL USUARIO O INVITADO
 
-        // $nombre1 ="dilker1.jpg";
-        // $nombre2 ="dilker2.jpg";
-        // $imagen1 =fopen(public_path('storage/eventos/'.''.$nombre1),'r');
-        // $imagen2 =fopen(public_path('storage/eventos/'.''.$nombre1),'r');
-
-        // $size = Storage::size('storage/eventos/'.''.$imagen1);
-        // Storage::setVisibility('storage/eventos/'.''.$nombre1, 'public');
-
-        // $visibility = Storage::getVisibility('storage/eventos/'.''.$nombre1);
-
-        // $name = Input::file(public_path('storage/eventos/'.''.$nombre1))->getClientOriginalName();
-        // dd($visibility);
         
-        $respuestaApi = Http::post('https://a26c-181-115-208-202.ngrok.io/compare',[
+        
+        $respuestaApi = Http::post('https://db0f-181-115-208-202.ngrok.io/compare',[
             "image1"=>"https://res.cloudinary.com/dirau81x6/image/upload/v1683673109/mtbi8rr676bzaw6pum9h.jpg",
-            "image2"=>"https://res.cloudinary.com/dirau81x6/image/upload/v1682963189/cld-sample.jpg"
+            "image2"=>"https://res.cloudinary.com/dirau81x6/image/upload/v1683673109/mtbi8rr676bzaw6pum9h.jpg"
         ]);
 
         
-        // if($respuestaApi->body()){
-        //     $n = strlen(var_dump($respuestaApi->body()));
-        //     dd($n);
-        //     dd($respuestaApi->body());
-        // }
-        dd($respuestaApi->body());
+        
+       
+        $cantidad= strlen($respuestaApi->body());
+        if($cantidad>3){
+            dd($respuestaApi->body());
+        }
+        dd('no hay similitud');
         
         $even = Evento::where('id','=',$evento)->get()->first();
 
-
+        
 
         $invitado =Invitado::find($even->invitado_id);
 
