@@ -134,10 +134,19 @@ class EventoController extends Controller
 
         // $name = Input::file(public_path('storage/eventos/'.''.$nombre1))->getClientOriginalName();
         // dd($visibility);
-        $json =
-        $respuestaApi = Http::post('https://a26c-181-115-208-202.ngrok.io/compare');/*['status']*/
+        
+        $respuestaApi = Http::post('https://a26c-181-115-208-202.ngrok.io/compare',[
+            "image1"=>"https://res.cloudinary.com/dirau81x6/image/upload/v1683673109/mtbi8rr676bzaw6pum9h.jpg",
+            "image2"=>"https://res.cloudinary.com/dirau81x6/image/upload/v1682963189/cld-sample.jpg"
+        ]);
 
-        //  dd($respuestaApi->body());
+        // if($respuestaApi->body()){
+        //     $n = strlen(var_dump($respuestaApi->body()));
+        //     dd($n);
+        //     dd($respuestaApi->body());
+        // }
+        dd($respuestaApi->body());
+        
         $even = Evento::where('id','=',$evento)->get()->first();
 
 
