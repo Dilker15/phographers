@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Invitado\Invitado;
 use App\Models\User;
+use App\Models\Dispositivo\Dispositivo;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -117,9 +118,15 @@ class InvitadoController extends Controller
             'codigo_dispositivo'=>$request['codigo_dispositivo'],
         ]);
 
+        $token = auth('api')->login($usuario);
+
         return response()->json([
             'res'=>true,
             'mensaje'=>"User creado con exito",
+            'autorizacion' => [
+                'token' => $token,
+                'type' => 'bearer'
+            ]
         ]);
             
 
@@ -140,27 +147,26 @@ class InvitadoController extends Controller
 
     public function loginInvitado(Request $request){
 
-            $user = User::where('email',$request['email'])->first();
+            $request->validate([
+               'email' => 'required|string|email',
+               'password' => 'required|string',
+            ]);
 
-            if($user && Hash::check($request['password'],$user->password)){
-                $token = $user->createToken($user->email)->plainTextToken;
-                $user->save();
+            $credentials = $request->only('email', 'password');
+            $token = auth('api')->attempt($credentials);
+            if($token){
 
                 return response()->json([
                     'res' => true,
                     'token' => $token,
                     "mensaje"=>"datos correctos",
                 ]);
-
-                
             }
 
         return response()->json([
             'res'=>false,
             'mensaje'=>"Datos incorrectos",
-        ]);
-
-
+        ], 401);
     }
 
     /**
