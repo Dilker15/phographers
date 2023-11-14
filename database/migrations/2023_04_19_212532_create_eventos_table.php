@@ -26,7 +26,7 @@ return new class extends Migration
             // );
             $table->foreignId('invitado_id')->constrained(
                 table: 'invitados'
-            );
+            )->nullable();
             $table->timestamps();
         });
     }

@@ -19,6 +19,7 @@ class Foto extends Model
         'url',
         'precio',
         'tipo',
+        'cloudinary_id'
     ];
 
 

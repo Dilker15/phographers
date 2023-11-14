@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('codigo_qr_id')->constrained(
                 table:'codigos_qr'
-            );
+            )->nullable();
            
             $table->timestamps();
         });

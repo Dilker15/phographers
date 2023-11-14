@@ -17,12 +17,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('evento_id')->constrained(
                 table:'eventos'
-            );
+            )->nullable();
             $table->foreignId('fotografo_id')->constrained(
                 table:'fotografos_estudios'
-            );
+            )->nullable();
             $table->decimal('precio',5,2);
             $table->String('url');
+            $table->string('cloudinary_id')->nullable();
             $table->unsignedSmallInteger('tipo')->default(1);
             $table->timestamps();
         });

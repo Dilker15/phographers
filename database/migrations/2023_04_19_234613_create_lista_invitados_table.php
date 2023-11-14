@@ -17,14 +17,14 @@ return new class extends Migration
             $table->id();
             $table->foreignId('codigo_qr_id')->constrained(
                 table:'codigos_qr'
-            );
+            )->nullable();
             $table->foreignId('invitado_id')->constrained(
                 table:'invitados'
-            );
+            )->nullable();
 
             $table->foreignId('evento_id')->constrained(
                 table:'eventos'
-            );
+            )->nullable();
             $table->timestamps();
         });
     }

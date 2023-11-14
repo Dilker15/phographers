@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->String('nombre');
             $table->String('apellidos');
-            $table->String('foto_perfil');
+            $table->String('foto_perfil')->nullable();
             $table->String('email')->unique();
             $table->String('telefono');
             $table->unsignedSmallInteger('estudio')->default(0);

@@ -95,11 +95,10 @@ class FotografoController extends Controller
                 'nombre'=> $request['nombre'],
                 'apellidos' => $request['apellidos'],
                 'email'=> $request['email'],
-                'foto_perfil' =>$url,
+                'foto_perfil' => $url,
                 'telefono' => $request['telefono'],
                 'tipo' => 2,
                 'sexo'=>$request['sexo'],
-
             ]);
 
             $usuario = User::create([
@@ -188,13 +187,15 @@ class FotografoController extends Controller
         $fotoCloud =Cloudinary::upload($imagen->getRealPath(),['folders'=>'fotografos']);
 
         $public_id=$fotoCloud->getPublicId();
+        
         $url =$fotoCloud->getSecurePath();
         
         $foto = Foto::create([
             'fotografo_id' => $request['fotografo'],
             'evento_id'=>$request['evento'],
-            'precio' => 999.00,
+            'precio' => 10.00,
             'url' => $url,
+            'cloudinary_id'=>$public_id,
          ]);
        
 

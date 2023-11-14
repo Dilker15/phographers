@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('plan_id')->constrained(
                 table:'planes'
-            );
+            )->nullable();
             $table->foreignId('fotografo_id')->constrained(
                 table:'fotografos_estudios'
-            );
+            )->nullable();
             $table->date('fecha');
             $table->boolean('estado')->default(0);
             $table->timestamps();

@@ -11,6 +11,7 @@ use App\Models\EventoFotografo\EventoFotografo;
 use App\Models\Foto\Foto;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use Aws\Rekognition\RekognitionClient;
 
 
 use App\Models\Invitado\Invitado;
@@ -124,29 +125,45 @@ class EventoController extends Controller
 
         $even = Evento::where('id','=',$evento)->get()->first();
         $invitado =Invitado::find($even->invitado_id);
-        
-        $respuestaApi = Http::post('https://db0f-181-115-208-202.ngrok.io/compare',[
-            "image1"=>"https://res.cloudinary.com/dirau81x6/image/upload/v1683673109/mtbi8rr676bzaw6pum9h.jpg",
-            "image2"=>"https://res.cloudinary.com/dirau81x6/image/upload/v1683673109/mtbi8rr676bzaw6pum9h.jpg"
+        $cliente = new RekognitionClient([
+            'region' => env('AWS_DEFAULT_REGION'),
+            'version' =>'latest'
         ]);
 
-        
-        
-       
-        $cantidad= strlen($respuestaApi->body());
-        if($cantidad>3){
-            dd($respuestaApi->body());
-        }
-        dd('no hay similitud');
-        
-       
+        //dd($fotos[0]->url);
 
+        $datos=[];
+        $i=0;
+        foreach($fotos as $fo){
+            
+            $result = $cliente->compareFaces([
+                'SimilarityThreshold' => 70, // Umbral de similitud (ajusta según tus necesidades)
+                'SourceImage' => [
+                    'Bytes' => file_get_contents($invitado->foto_perfil),
+                ],
+                'TargetImage' => [
+                    'Bytes' => file_get_contents($fo->url),
+                ],
+            ]);
+            
+            $faceMatches = $result['FaceMatches'];
+            // $datos[$i]=$faceMatches;
+            // $i++;
+            // //dd($faceMatches);
+            if(count($faceMatches)>0){
+                $fo->similar=true;
+
+                // notificar user->id == movil_id
+            }
+    }
+
+         //$faceMatches = $result['FaceMatches'];
+
+
+        // dd($datos);
         
 
-        
-
-        // dd($invitado->foto_perfil);
-
+    
 
 
         

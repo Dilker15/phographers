@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('evento_id')->constrained(
                 table:'eventos'
-            );
+            )->nullable();
             $table->foreignId('fotografo_id')->constrained(
                 table:'fotografos_estudios'
-            );
+            )->nullable();
             $table->unsignedSmallInteger('estado')->default(0);
             $table->timestamps();
         });

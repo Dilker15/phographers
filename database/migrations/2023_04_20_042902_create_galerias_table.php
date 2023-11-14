@@ -18,7 +18,7 @@ return new class extends Migration
             $table->String('descripcion');
             $table->foreignId('evento_fotografo_id')->constrained(
                 table:'evento_fotografos'
-            );
+            )->nullable();
             $table->timestamps();
         });
     }

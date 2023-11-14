@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('fotografo_id')->constrained(
                 table:'fotografos_estudios'
-            );
+            )->nullable();
             $table->String('foto1');
             $table->String('foto2');
             $table->String('foto3');

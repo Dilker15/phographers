@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('invitados', function (Blueprint $table) {
             $table->id();
             $table->String('nombre');
-            $table->String('apellidos');
-            $table->String('foto_perfil');
+            $table->String('apellidos')->nullable();
+            $table->String('foto_perfil')->nullable();
             $table->String('email')->unique();
-            $table->String('telefono');
-            $table->unsignedSmallInteger('sexo')->default(1);
+            $table->String('telefono')->nullable();
+            $table->unsignedSmallInteger('sexo')->default(1)->nullable();
             $table->unsignedSmallInteger('tipo')->default(2);
             
 

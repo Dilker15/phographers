@@ -13,16 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('detalle_pagos', function (Blueprint $table) {
+        Schema::create('dispositivos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pago_id')->constrained(
-                table:'pagos'
+            $table->string('codigo_dispositivo')->nullable();
+            $table->foreignId('invitado_id')->constrained(
+                table:'invitados'
             )->nullable();
-            $table->foreignId('foto_id')->constrained(
-                table:'fotos'
-            )->nullable();
-            $table->unsignedInteger('cantidad');
-            $table->decimal('total',5,2);
+            $table->boolean('estado')->default(1);
             $table->timestamps();
         });
     }
@@ -34,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detalle_pagos');
+        Schema::dropIfExists('dispositivos');
     }
 };

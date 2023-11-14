@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('fecha');
             $table->foreignId('invitado_id')->constrained(
                 table:'invitados'
-            );
+            )->nullable();
             $table->unsignedSmallInteger('estado')->default(1);
             $table->timestamps();
         });
