@@ -198,7 +198,7 @@ class FotografoController extends Controller
             'cloudinary_id'=>$public_id,
          ]);
        
-
+        // notificacion 
         
         // $nombre =time().'.'.$imagen->extension();
         // Storage::putFileAs('public/eventos',new File($imagen),$nombre);

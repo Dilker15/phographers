@@ -62,13 +62,10 @@ class InvitadoController extends Controller
             
 
             $invitado = Invitado::create([
-                'nombre' => $request['nombre'],
-                'apellidos' => $request['apellidos'],
-                'email' => $request['email'],
-                'foto_perfil' => $url,
-                'telefono' => $request['telefono'],
+                'nombre' => $request['nombre'],     // obligatorio
+                'email' => $request['email'],       // obligatorio
+                'foto_perfil' => $url,              // obligatorio
                 'tipo' => 1,
-                'sexo' => $request['sexo'],
             ]);
 
 
@@ -78,7 +75,7 @@ class InvitadoController extends Controller
                 'role_id' => 1,
                 'invitado_id' => $invitado->id,
                 'tipo_user' => 2,
-                'password' => bcrypt($request['password']),
+                'password' => bcrypt($request['password']),  // obligatorio
             ]); 
 
             return view('welcome');
@@ -141,7 +138,11 @@ class InvitadoController extends Controller
     public function loginInvitado(Request $request){
 
             $user = User::where('email',$request['email'])->first();
-
+            $tokenDispositivo = $request['token'];
+            Dispositivo::create([
+                'codigo_dispositvo'=>$tokenDispositivo,
+                'invitado_id'=>$user->invitado_id,
+            ]);
             if($user && Hash::check($request['password'],$user->password)){
                 $token = $user->createToken($user->email)->plainTextToken;
                 $user->save();
@@ -160,6 +161,12 @@ class InvitadoController extends Controller
             'mensaje'=>"Datos incorrectos",
         ]);
 
+
+    }
+
+
+
+    public function misEventos($idUser){
 
     }
 

@@ -12,7 +12,8 @@ class CodigoQr extends Model
     protected $table = 'codigos_qr';
 
     protected $fillable = [
-        'evento_id'
+        'evento_id',
+        'imagen_codigo'
     ];
 
 

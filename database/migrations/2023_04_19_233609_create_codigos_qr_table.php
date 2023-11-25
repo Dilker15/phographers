@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('evento_id')->constrained(
                 table: 'eventos'
             )->nullable();
+            $table->text('imagen_codigo')->nullable();
             $table->timestamps();
         });
     }

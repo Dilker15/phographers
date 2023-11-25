@@ -13,13 +13,27 @@
 </div>
     
 
+
  
 <div class="grilla">
 
-  
+{{-- 
+    <table id="invitados_table">
+      <thead>
+        <th>Invitado</th>
+        <th>Email Invitado</th>
+      </thead>
+       <tbody>
+        @foreach($invitadosDelEvento as $invitado)
+           <tr>{{$invitado}}</tr>
+           <tr>{{$invitado}}</tr>
+        @endforeach  
+       </tbody>
+    </table> --}}
+
     @foreach($fotografos as $fotografo)
 
-  
+    
     <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="https://placeimg.com/640/480/tech" alt="Card image cap">
         <div class="card-body">
@@ -38,34 +52,35 @@
     </div>
 
     @endforeach
+</div>
 
-      {{-- <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{asset('descargar1.jpg')}}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{asset('descargar2.jpg')}}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{asset('descargar1.jpg')}}" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div> --}}
+<div class="listaInvitados">
+  <h2 class="title-list">Lista de invitados</h2>
+  <table id="miTabla">
     
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Foto</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach($invitadosDelEvento as $invitado)
+      <tr>
+        <td>{{explode('-', $invitado)[0]}}</td>
+        <td>{{explode('-', $invitado)[1]}}</td>
+        <td>
+          <img src="{{explode('-', $invitado)[2]}}" alt="foto_invitado" width="80" height="90">
+        </td>
+      </tr
+      @endforeach
+     >
+    </tbody>
+    
+  </table>
+  <button id="descargar">Descargar Lista</button>
+
 
 </div>
 
@@ -75,6 +90,24 @@
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
     <style>
+
+      .listaInvitados{
+        margin-left:25%;
+      }
+
+table {
+      border-collapse: collapse;
+      width: 50%;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
         .grilla{
             display:grid;
             grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr));
@@ -93,9 +126,20 @@
           justify-content:center;
           gap:1rem;
         }
+
+        .title-list{
+          font:2rem;
+          color:red;
+          margin-left:6rem;
+        }
     </style>
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    <script> 
+            const des = document.getElementById("descargar");
+            des.addEventListener("click",()=>{
+              window.print();
+            });
+    </script>
 @stop

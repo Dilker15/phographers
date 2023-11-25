@@ -13,45 +13,53 @@
         @method('post')
         @csrf
         <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="nombre">Nombre Evento</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
-          </div>
-          <div class="form-group col-md-3">
-            <label for="fecha">Fecha Del Evento</label>
-            <input type="date" class="form-control" id="fecha" name="fecha" placeholder="fecha">
-          </div>
-          <div class="form-group col-md-3">
-            <label for="hora">Hora</label>
-            <input type="time" class="form-control" id="hora" name="hora" placeholder="fecha">
-          </div>
+            <div class="form-group col-md-6">
+              <label for="nombre">Nombre Evento</label>
+              <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="fecha">Fecha Del Evento</label>
+              <input type="date" class="form-control" id="fecha" name="fecha" placeholder="fecha">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="hora">Hora</label>
+              <input type="time" class="form-control" id="hora" name="hora" placeholder="fecha">
+            </div>
         </div>
         <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="descripcion">Decripcion del evento</label>
-           <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion">
-          </textarea>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="direccion">Direccion Evento</label>
-            <input type="text" class="form-control" id="direccion" name="direccion" placeholder="direccion">
+          <div class="form-group col-md-6">
+            <label for="descripcion">Decripcion del evento</label>
+            <textarea class="form-control" id="descripcion" name="descripcion" placeholder="Descripcion">
+            </textarea>
           </div>
+          <div class="form-group col-md-6">
+              <label for="direccion">Direccion Evento</label>
+              <input type="text" class="form-control" id="direccion" name="direccion" placeholder="direccion">
+            </div>
         </div>
         
         
-        <input id="id_administrador" name="id_administrador" hidden>
-    <div class="form-row">
-        <div class="form-group col-md-10 photo">
-            <label for="fotografo" class="photo2">Fotografos - Estudios</label>
-        <select name="fotografos[]" id="fotografos" multiple>
-            @foreach($fotografos as $fotografo)
-              <option value={{$fotografo->id}}>{{$fotografo->nombre.' '.$fotografo->apellidos}}</option>
-            @endforeach
-        </select>
-    <div class="form-group centro">
-            <button type="submit" class="btn-enviar">Crear</button>
-    </div> 
-        
+          <input id="id_administrador" name="id_administrador" hidden>
+        <div class="form-row">
+            <div class="form-group col-md-10 photo">
+                <label for="fotografo" class="photo2">Fotografos - Estudios</label>
+                <select name="fotografos[]" id="fotografos" multiple>
+                    @foreach($fotografos as $fotografo)
+                      <option value={{$fotografo->id}}>{{$fotografo->nombre}}</option>
+                    @endforeach
+                </select>
+                <br>
+                <label for="invitados" class="photo2">Lista De Invitados</label>
+                <select name="invitados[]" id="invitados" multiple>
+                    @foreach($invitados as $invitado)
+                      <option value={{$invitado->email}}>{{$invitado->email}}</option>
+                    @endforeach
+                </select>
+                <div class="form-group centro">
+                    <button type="submit" class="btn-enviar">Crear</button>
+                </div> 
+            </div>
+          </div>
       </form>
     
 

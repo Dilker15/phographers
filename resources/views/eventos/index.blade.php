@@ -11,7 +11,7 @@
 <div class="card-bodys">
     <a href="{{route('evento.create')}}" class="btn btn-success btn-sm">Crear Evento</a>
 </div>
-    
+    {{-- {{$codigo}} --}}
 
  
 <div class="grilla">
