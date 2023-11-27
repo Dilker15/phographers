@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Dispositivo\Dispositivo;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Evento\Evento;
 
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
@@ -258,9 +259,17 @@ class InvitadoController extends Controller
 
 
    public function misEventos(Request $request){
-    $usuario = Auth::user()->email;
+    $usuario = Auth::user()->invitado_id;
   
-        $eventos = ListaInvitado::where('invitado_id',$invitado)->get();
+        $eventos = ListaInvitado::where('invitado_id',$usuario)->get();
+       
+        foreach($eventos as $evento){
+             $actual = Evento::find($evento->evento_id)->first();
+             $evento->nombre = $actual->nombre;  
+             $evento->fecha = $actual->fecha_evento;
+             $evento->hora=$actual->hora_evento; 
+             $evento->ubicacion = $actual->ubicacion;
+        }
         return response()->json([
             'res'=>true,
             'datos'=>$eventos,
