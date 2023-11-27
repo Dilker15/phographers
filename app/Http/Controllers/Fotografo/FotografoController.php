@@ -244,7 +244,7 @@ class FotografoController extends Controller
                 $invitadoActual = Invitado::find($invitado->invitado_id);
                 $fotoActual = $invitadoActual->foto_perfil;
 
-
+              
                 $result = $cliente->compareFaces([
                     'SimilarityThreshold' => 70, // Umbral de similitud (ajusta según tus necesidades)
                     'SourceImage' => [
@@ -254,6 +254,8 @@ class FotografoController extends Controller
                         'Bytes' => file_get_contents($url),
                     ],
                 ]);
+
+                
 
                
                 $faceMatches = $result['FaceMatches'];

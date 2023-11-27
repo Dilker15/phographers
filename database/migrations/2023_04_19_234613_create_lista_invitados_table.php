@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('lista_invitados', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('codigo_qr_id')->constrained(
-                table:'codigos_qr'
-            )->nullable();
+            // $table->foreignId('codigo_qr_id')->constrained(
+            //     table:'codigos_qr'
+            // )->nullable();
             $table->foreignId('invitado_id')->constrained(
                 table:'invitados'
             )->nullable();

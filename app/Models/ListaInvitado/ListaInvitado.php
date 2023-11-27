@@ -12,7 +12,6 @@ class ListaInvitado extends Model
     protected $table='lista_invitados';
 
     protected $fillable = [
-        'codigo_qr_id',
         'invitado_id',
         'evento_id'
 

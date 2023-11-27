@@ -145,7 +145,7 @@ class EventoController extends Controller
         for($i=0;$i<count($invitados);$i++){
             $invitado = Invitado::where('email',$invitados[$i])->first();
             $listasInvitados = ListaInvitado::create([
-                'codigo_qr_id'=>1,
+                
                 'invitado_id'=>$invitado->id,
                 'evento_id'=>$evento->id,
             ]);
