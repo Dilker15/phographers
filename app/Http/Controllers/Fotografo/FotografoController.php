@@ -14,9 +14,10 @@ use App\Models\EventoFoto\EventoFoto;
 use App\Models\ListaInvitado\ListaInvitado;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use App\Models\Invitado\Invitado;
-
+use App\Models\Dispositivo\Dispositivo;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use ExpoSDK\Expo;
 use Aws\Rekognition\RekognitionClient;
 
 use Illuminate\Http\File;
@@ -265,7 +266,29 @@ class FotografoController extends Controller
                         'foto'=>$url,
                         'invitado_id'=>$invitado->invitado_id,
                     ]);
+
+                    try {
+                        
+                    $token = Dispositivo::where('invitado_id',$invitado->invitado_id)->first()->codigo_dispositivo;
+
+                    $messages = [
+                        [
+                            'title' => 'Concidencia encontrada',
+                            'to' => 'Apareces en una foto en un Evento',
+                        ],
+                    ];
+                    $defaultRecipients = [
+                        "$token",
+                    ];
+                    (new Expo)->send($messages)->to($defaultRecipients)->push();
+                    } catch (\Throwable $th) {
+                        
+                    }
+
+
                 }
+
+
         
             }
              

@@ -264,7 +264,7 @@ class InvitadoController extends Controller
         $eventos = ListaInvitado::where('invitado_id',$usuario)->get();
        
         foreach($eventos as $evento){
-             $actual = Evento::find($evento->evento_id)->first();
+             $actual = Evento::find($evento->evento_id);
              $evento->nombre = $actual->nombre;  
              $evento->fecha = $actual->fecha_evento;
              $evento->hora=$actual->hora_evento; 

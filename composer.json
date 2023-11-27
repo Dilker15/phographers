@@ -9,6 +9,7 @@
         "aws/aws-sdk-php": "^3.285",
         "bacon/bacon-qr-code": "^2.0",
         "cloudinary-labs/cloudinary-laravel": "^2.0",
+        "ctwillie/expo-server-sdk-php": "^2.0",
         "guzzlehttp/guzzle": "^7.5",
         "jeroennoten/laravel-adminlte": "^3.9",
         "laravel/framework": "^9.19",
