@@ -19,13 +19,13 @@
   
     @foreach($fotos as $foto)
 
-    @if($foto->similar=="true")
+    {{-- @if($foto->similar=="true") --}}
 
     <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{$foto->url}}" alt="Card image cap">  
+        <img class="card-img-top" src="{{$foto->foto}}" alt="Card image cap">  
       </div>
 
-    @endif
+    {{-- @endif --}}
   
    
 

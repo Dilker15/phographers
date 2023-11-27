@@ -16,20 +16,28 @@ use App\Http\Controllers\Evento\EventoController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    //return $request->user();
+    Route::get('/getMisEvento',[InvitadoController::class,'misEventos']);
+    Route::get('/fotosDeMiEvento/{evento}',[InvitadoController::class,'getFotosEvento']);
 });
 
 
 Route::post('/crearInvitados',[InvitadoController::class,'appInvitado']);  // este es el crear un invitado con foto y codigo de dispositivo para notificarle cuando se encuentre un match en las fotos de algun fotografo
+
 Route::post('/login',[InvitadoController::class,'loginInvitado']);
 
-
-Route::get('/getMisEvento',[InvitadoController::class,'index']);
-
-Route::get('/fotosDeMisEventos/{idEvento}',[InvitadoController::class,'getFotosEventos']);
-
-
 Route::get('/enviarCorreo',[EventoController::class,'sendEmail']);
+//Route::get('/getMisEvento',[InvitadoController::class,'index']);
+
+
+
+
+
+
+
+
+
+Route::get('/bajaCalidad',[InvitadoController::class,'obtenerImagenConBajaCalidad']);
 
 //Route::get('/generateQr',[EventoController::class,'mostrarQr']);

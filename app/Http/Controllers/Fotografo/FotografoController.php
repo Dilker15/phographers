@@ -10,10 +10,16 @@ use App\Models\User;
 use App\Models\Invitacion\Invitacion;
 use App\Models\EventoFotografo\EventoFotografo;
 use App\Models\Albun\Albun;
+use App\Models\EventoFoto\EventoFoto;
+use App\Models\ListaInvitado\ListaInvitado;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use App\Models\Invitado\Invitado;
+
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
+use Aws\Rekognition\RekognitionClient;
 
 use Illuminate\Http\File;
-use Illuminate\Support\Facades\Storage;
 
 class FotografoController extends Controller
 {
@@ -167,6 +173,29 @@ class FotografoController extends Controller
 
     }
 
+    public function RegistrarYNotificar($url_imagen,$evento){
+        $invitados = ListaInvitados::where('evento_id',$evento)->get();
+        
+            foreach($invitados as $invitado){
+
+                EventoFoto::create([
+                    'invitado_id'=>$invitado->id,
+                    'evento_id'=>$evento,
+                    'foto'=>$url_imagen,
+                ]);
+            }
+        
+
+
+
+        // $listasInvitados = ListaInvitado::create([
+        //     'codigo_qr_id'=>1,
+        //     'invitado_id'=>$invitado->id,
+        //     'evento_id'=>$evento->id,
+        // ]);
+            
+    }
+
     
 
 
@@ -187,7 +216,7 @@ class FotografoController extends Controller
         $fotoCloud =Cloudinary::upload($imagen->getRealPath(),['folders'=>'fotografos']);
 
         $public_id=$fotoCloud->getPublicId();
-        
+       
         $url =$fotoCloud->getSecurePath();
         
         $foto = Foto::create([
@@ -197,11 +226,47 @@ class FotografoController extends Controller
             'url' => $url,
             'cloudinary_id'=>$public_id,
          ]);
-       
-        // notificacion 
+         $invitados = ListaInvitado::where('evento_id',$request['evento'])->get();
+        //  EventoFoto::create([
+        //     'invitado_id'=>1,
+        //      'evento_id'=>1,
+        //      'foto'=>$url,
+        //  ]);
+
+          $cliente = new RekognitionClient([
+            'region' => env('AWS_DEFAULT_REGION'),
+            'version' =>'latest'
+            ]);
+
+            foreach($invitados as $invitado){
+
+
+                $invitadoActual = Invitado::find($invitado->invitado_id);
+                $fotoActual = $invitadoActual->foto_perfil;
+
+
+                $result = $cliente->compareFaces([
+                    'SimilarityThreshold' => 70, // Umbral de similitud (ajusta según tus necesidades)
+                    'SourceImage' => [
+                        'Bytes' => file_get_contents($fotoActual),
+                    ],
+                    'TargetImage' => [
+                        'Bytes' => file_get_contents($url),
+                    ],
+                ]);
+
+               
+                $faceMatches = $result['FaceMatches'];
+                if(count($faceMatches)>0){
+                    EventoFoto::create([
+                        'evento_id'=>$request['evento'],
+                        'foto'=>$url,
+                        'invitado_id'=>$invitado->invitado_id,
+                    ]);
+                }
         
-        // $nombre =time().'.'.$imagen->extension();
-        // Storage::putFileAs('public/eventos',new File($imagen),$nombre);
+            }
+             
        
          
         

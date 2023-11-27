@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Fotografo\Fotografo;
 use App\Models\Evento\Evento;
+use App\Models\EventoFoto\EventoFoto;
 use App\Models\Invitacion\Invitacion;
 use App\Models\EventoFotografo\EventoFotografo;
 use App\Models\Foto\Foto;
@@ -339,43 +340,38 @@ class EventoController extends Controller
 
         $even = Evento::where('id','=',$evento)->get()->first();
         $invitado =Invitado::find($even->invitado_id);
-        $cliente = new RekognitionClient([
-            'region' => env('AWS_DEFAULT_REGION'),
-            'version' =>'latest'
-        ]);
+
+        $fotos = EventoFoto::where('invitado_id',$even->invitado_id)->get();
+
+        //dd($even->invitado_id);
+        // $cliente = new RekognitionClient([
+        //     'region' => env('AWS_DEFAULT_REGION'),
+        //     'version' =>'latest'
+        // ]);
 
         //dd($fotos[0]->url);
 
-        $datos=[];
-        $i=0;
-        foreach($fotos as $fo){
+        // $datos=[];
+        // $i=0;
+        // foreach($fotos as $fo){
             
-            $result = $cliente->compareFaces([
-                'SimilarityThreshold' => 70, // Umbral de similitud (ajusta según tus necesidades)
-                'SourceImage' => [
-                    'Bytes' => file_get_contents($invitado->foto_perfil),
-                ],
-                'TargetImage' => [
-                    'Bytes' => file_get_contents($fo->url),
-                ],
-            ]);
+        //     $result = $cliente->compareFaces([
+        //         'SimilarityThreshold' => 70, // Umbral de similitud (ajusta según tus necesidades)
+        //         'SourceImage' => [
+        //             'Bytes' => file_get_contents($invitado->foto_perfil),
+        //         ],
+        //         'TargetImage' => [
+        //             'Bytes' => file_get_contents($fo->url),
+        //         ],
+        //     ]);
             
-            $faceMatches = $result['FaceMatches'];
-            // $datos[$i]=$faceMatches;
-            // $i++;
-            // //dd($faceMatches);
-            if(count($faceMatches)>0){
-                $fo->similar=true;
+        //     $faceMatches = $result['FaceMatches'];
+        //     if(count($faceMatches)>0){
+        //         $fo->similar=true;
 
-                // notificar user->id == movil_id
-            }
-    }
-
-         //$faceMatches = $result['FaceMatches'];
-
-
-        // dd($datos);
-        
+        //         // notificar user->id == movil_id
+        //     }
+        // }
 
     
 

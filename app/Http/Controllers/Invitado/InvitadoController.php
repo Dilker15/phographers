@@ -5,13 +5,18 @@ namespace App\Http\Controllers\Invitado;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Invitado\Invitado;
+use App\Models\EventoFoto\EventoFoto;
+use App\Models\ListaInvitado\ListaInvitado;
 use App\Models\User;
+use App\Models\Dispositivo\Dispositivo;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+
 
 class InvitadoController extends Controller
 {
@@ -109,6 +114,7 @@ class InvitadoController extends Controller
         ]); 
 
 
+
         $dipositivo = Dispositivo::create([
             'invitado_id'=>$invitado->id,
             'codigo_dispositivo'=>$request['codigo_dispositivo'],
@@ -123,6 +129,8 @@ class InvitadoController extends Controller
         
     }
 
+
+  
     /**
      * Display the specified resource.
      *
@@ -166,9 +174,7 @@ class InvitadoController extends Controller
 
 
 
-    public function misEventos($idUser){
-
-    }
+   
 
     /**
      * Show the form for editing the specified resource.
@@ -214,4 +220,70 @@ class InvitadoController extends Controller
     {
         //
     }
+
+
+    public function getFotosEvento($evento){
+        $invitado = Auth::user()->invitado_id;
+        // dd($invitado);
+        $fotos = EventoFoto::where('evento_id',$evento)->where('invitado_id',$invitado)->get();
+
+
+        // $url = 'https://res.cloudinary.com/dirau81x6/image/upload/v1701013218/lrav4e1njm6kgh92tpvk.jpg';
+
+        // $pattern = '/(\/upload\/)/';
+        // $replacement = '$1q_5/';
+
+        // $newUrl = preg_replace($pattern, $replacement, $url);
+
+        // return response()->json([
+        //     'res'=>true,
+        //     'datos'=>$newUrl,
+        // ]);
+        foreach($fotos as $foto){
+            $url = $foto->foto;
+
+            $pattern = '/(\/upload\/)/';
+            $replacement = '$1q_5/';
+    
+            $newUrl = preg_replace($pattern, $replacement, $url);
+            $foto->foto=$newUrl;
+
+        }
+        return response()->json([
+            'res'=>true,
+            'datos'=>$fotos,
+        ]);
+   }
+
+
+
+   public function misEventos(Request $request){
+    $usuario = Auth::user()->email;
+  
+        $eventos = ListaInvitado::where('invitado_id',$invitado)->get();
+        return response()->json([
+            'res'=>true,
+            'datos'=>$eventos,
+        ]);
+   }
+
+
+//    use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+
+        public function obtenerImagenConBajaCalidad()
+        {
+           
+            $url = 'https://res.cloudinary.com/dirau81x6/image/upload/v1701013218/lrav4e1njm6kgh92tpvk.jpg';
+
+            $pattern = '/(\/upload\/)/';
+            $replacement = '$1q_5/';
+
+            $newUrl = preg_replace($pattern, $replacement, $url);
+
+            return response()->json([
+                'res'=>true,
+                'datos'=>$newUrl,
+            ]);
+        }
+
 }
