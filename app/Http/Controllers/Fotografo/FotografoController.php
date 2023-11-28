@@ -270,7 +270,13 @@ class FotografoController extends Controller
 
                     try {
                         
-                    $token = Dispositivo::where('invitado_id',$invitado->invitado_id)->first()->codigo_dispositivo;
+                    $token = Dispositivo::where('invitado_id',$invitado->invitado_id)->get();
+
+                    $defaultRecipient = array();
+                    foreach ($token as $tok) {
+                        if ($tok->codigo_dispositivo)
+                         array_push($defaultRecipient, $tok->codigo_dispositivo);
+                    }
 
                     $messages = [
                         new ExpoMessage([
@@ -278,9 +284,7 @@ class FotografoController extends Controller
                             'body' => 'Apareces en una foto en un Evento',
                         ]),
                     ];
-                    $defaultRecipients = [
-                        "$token",
-                    ];
+
                     (new Expo)->send($messages)->to($defaultRecipients)->push();
                     } catch (\Throwable $th) {
                         
