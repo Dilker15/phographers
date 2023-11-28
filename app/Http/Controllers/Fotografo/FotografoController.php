@@ -18,6 +18,7 @@ use App\Models\Dispositivo\Dispositivo;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use ExpoSDK\Expo;
+use ExpoSDK\ExpoMessage;
 use Aws\Rekognition\RekognitionClient;
 
 use Illuminate\Http\File;
@@ -272,10 +273,10 @@ class FotografoController extends Controller
                     $token = Dispositivo::where('invitado_id',$invitado->invitado_id)->first()->codigo_dispositivo;
 
                     $messages = [
-                        [
+                        new ExpoMessage([
                             'title' => 'Concidencia encontrada',
-                            'to' => 'Apareces en una foto en un Evento',
-                        ],
+                            'body' => 'Apareces en una foto en un Evento',
+                        ]),
                     ];
                     $defaultRecipients = [
                         "$token",
